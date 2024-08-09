@@ -18,6 +18,19 @@ def create_batting_stats_db(output_dir_path: str) -> None:
     with open(batting_scheme_file_path, "r") as sql_file:
         conn.executescript(sql_file.read())
 
+    df = _load_and_preprocess_data(batting_csv_path)
+
+    # データベースにデータを挿入
+    df.to_sql("BattingStats", conn, if_exists="append", index=False)
+
+    # 接続を閉じる
+    conn.close()
+
+
+def _load_and_preprocess_data(batting_csv_path: str) -> pd.DataFrame:
+    """
+    CSVファイルを読み込み、データを加工する
+    """
     # CSVファイルを読み込む
     df = pd.read_csv(batting_csv_path, encoding="ISO-8859-1")
 
@@ -33,11 +46,7 @@ def create_batting_stats_db(output_dir_path: str) -> None:
     # 不要なカラムを削除
     df = df.drop(columns=["stint", "lgID", "G_batting", "G_old"])
 
-    # データベースにデータを挿入
-    df.to_sql("BattingStats", conn, if_exists="append", index=False)
-
-    # 接続を閉じる
-    conn.close()
+    return df
 
 
 def _rename_columns(df: pd.DataFrame) -> pd.DataFrame:
