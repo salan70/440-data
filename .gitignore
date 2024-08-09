@@ -26,3 +26,7 @@ set_env_vars.sh
 
 # output
 output/
+
+# 簡単な動作確認として使用しているため、監視対象外とする
+# notebooks
+notebooks/
