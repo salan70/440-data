@@ -1,6 +1,7 @@
 from datetime import datetime
 import os
 from create_batting_stats import create_batting_stats_db
+from create_players import create_players_db
 
 
 def _create_output_directory() -> str:
@@ -18,6 +19,9 @@ def main():
 
     # 打撃成績のDBを作成
     create_batting_stats_db(output_dir_path)
+
+    # 選手情報のDBを作成
+    create_players_db(output_dir_path)
 
 
 if __name__ == "__main__":
