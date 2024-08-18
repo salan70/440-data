@@ -3,13 +3,12 @@ import sqlite3
 import numpy as np
 
 
-def create_batting_stats_db(output_dir_path: str) -> None:
+def create_batting_stats_db(output_db_file_path: str) -> None:
     """
     打撃成績のDBを作成する
     """
     batting_csv_path = "assets/Lahman_1871-2023_data/lahman_1871-2023_csv/Batting.csv"
     batting_scheme_file_path = "scheme/batting_stats.sql"
-    output_db_file_path = f"{output_dir_path}/batting_stats.db"
 
     # SQLite データベースに接続 (存在しない場合は新規作成)
     conn = sqlite3.connect(output_db_file_path)

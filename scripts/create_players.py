@@ -4,13 +4,12 @@ import sqlite3
 import pandas as pd
 
 
-def create_players_db(output_dir_path: str) -> None:
+def create_players_db(output_db_file_path: str) -> None:
     """
     打撃成績のDBを作成する
     """
     people_csv_path = "assets/Lahman_1871-2023_data/lahman_1871-2023_csv/People.csv"
     players_scheme_file_path = "scheme/players.sql"
-    output_db_file_path = f"{output_dir_path}/players.db"
 
     # SQLite データベースに接続 (存在しない場合は新規作成)
     conn = sqlite3.connect(output_db_file_path)
